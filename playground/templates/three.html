@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Title</title>
+</head>
+<body>
+{% if products %}
+    <ul>
+        {% for product in products %}
+            <li>{{ product.title }}</li>
+        {% endfor %}
+    </ul>
+{% elif collections %}
+    <ul>
+        {% for collection in collections %}
+            <li>{{ collection.title }}</li>
+        {% endfor %}
+    </ul>
+{% elif orders %}
+    <ul>
+        {% for order in orders %}
+            <li>{{ order.id }} - {{ order.placed_at|date:"l, d F y" }} - {{ order.customer.first_name }}</li>
+            <ul>
+                {% for order_item in order.orderitem_set.all %}
+                    <li><strong>ID:</strong> {{ order_item.id }} | <strong>Quantity:</strong> {{ order_item.quantity }}
+                        | <strong>Price:</strong> {{ order_item.unit_price }} |
+                        <strong>Name:</strong> {{ order_item.product.title }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+{% elif order_items %}
+    <ul>
+        {% for order_item in order_items %}
+            <li>{{ order_item.id }} - {{ order_item.quantity }} - {{ order_item.unit_price }}</li>
+        {% endfor %}
+    </ul>
+{% elif customers %}
+    <ul>
+        {% for customer in customers %}
+            <li>{{ customer.first_name }} - {{ customer.email }}</li>
+        {% endfor %}
+    </ul>
+{% elif count %}
+    <p>{{ count }}</p>
+{% else %}
+    <p>No data. Maybe check console?</p>
+{% endif %}
+</body>
+</html>
