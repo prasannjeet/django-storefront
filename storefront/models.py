@@ -11,6 +11,12 @@ class Collection(models.Model):
     # products = models.ManyToManyField(Product)
     featured_product: 'Product' = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True, related_name='+')
 
+    def __str__(self) -> str:
+        return self.title
+
+    class Meta:
+        ordering = ['title']
+
 
 class Promotion(models.Model):
     description: str = models.CharField(max_length=255)
@@ -34,6 +40,12 @@ class Product(models.Model):
     collection: Collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
     promotions: Manager = models.ManyToManyField(Promotion)
 
+    def __str__(self) -> str:
+        return self.title
+
+    class Meta:
+        ordering = ['title']
+
 
 # Choices - just like ENUM in Java
 
@@ -53,11 +65,17 @@ class Customer(models.Model):
     birth_date: date = models.DateField(null=True, blank=True)
     membership: str = models.CharField(max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
 
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
+
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
 
 class Order(models.Model):
     STATUS_PENDING: str = 'P'
     STATUS_COMPLETED: str = 'C'
-    STATUS_CANCELLED: str = 'X'
+    STATUS_CANCELLED: str = 'F'
     STATUS_CHOICES: list[tuple[str, str]] = [
         (STATUS_PENDING, 'Pending'),
         (STATUS_COMPLETED, 'Completed'),
