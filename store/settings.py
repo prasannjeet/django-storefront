@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'playground.apps.PlaygroundConfig',
     'debug_toolbar',
     'storefront.apps.StorefrontConfig',
+    'storefront_custom.apps.StorefrontCustomConfig',
     'tags.apps.TagsConfig',
     'likes.apps.LikesConfig'
 ]

@@ -1,9 +1,9 @@
-from typing import ItemsView, Any, List, Dict
+from typing import ItemsView, Any, Dict
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction, connection
-from django.db.models import QuerySet, Q, F, Prefetch, Min, Max, Count, Avg, Sum, Value, Func
+from django.db.models import QuerySet, Q, F, Min, Max, Count, Avg, Sum, Value, Func
 from django.db.models.functions import Concat
 from django.db.models.query import RawQuerySet
 from django.shortcuts import render
